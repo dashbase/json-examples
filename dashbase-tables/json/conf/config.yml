@@ -1,0 +1,49 @@
+dashbase:
+  baseDir: /tmp/dashbase/index
+
+  cluster:
+    name: dashbase-example
+    url: localhost:2181
+
+  firehose:
+    params:
+      file: "../data/nginx.json"
+    type: file
+  indexer:
+    maxIndexingDelayInSec: 5
+  parser:
+    type: json
+    params:
+        pattern:
+          timeFormat: "dd/MMM/yyyy:HH:mm:ss Z"
+          schema:
+              - name: timestamp
+                type: time
+              - name: host
+                type: meta
+              - name: request
+                type: text
+              - name: responseCode
+                type: meta
+              - name: numBytes
+                type: numeric
+              - name: agent
+                type: text
+
+server:
+  applicationConnectors:
+  - type: http
+    port: ${PORT} 
+  adminConnectors:
+  - type: http
+    port: ${ADMINPORT} 
+
+logging:
+  level: INFO
+  appenders:
+      - type: file
+        currentLogFilename: /tmp/dashbase/logs/dashbase.log
+        archive: true
+        archivedLogFilenamePattern: /tmp/dashbaser/logs/dashbase-%d.log
+        archivedFileCount: 9
+        timeZone: UTC

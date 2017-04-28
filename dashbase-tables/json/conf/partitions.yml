@@ -1,0 +1,17 @@
+# e.g. this maps to:
+#     s3://eero-cloud-logs-compressed/e2ro.com/haproxy/2017-04-01/<PATTERN>
+#     s3://eero-cloud-logs-compressed/e2ro.com/haproxy/2017-04-01/<PATTERN>
+#     s3://eero-cloud-logs-compressed/e2ro.com/haproxy/2017-04-01/<PATTERN>
+partitions: [0, 1]
+
+mappings:
+    - PARTITION: 0 
+      PORT: 7888
+      ADMINPORT: 7887
+      PATTERN: "lb1/.*|lb9/.*|lb11/.*"
+      HEAP_OPTS: "-Xmx1g -Xms512m -XX:NewSize=512m"
+    - PARTITION: 1
+      PORT: 7889
+      ADMINPORT: 7886
+      PATTERN: "lb8/.*|lb10/.*|lb12/.*"
+      HEAP_OPTS: "-Xmx1g -Xms512m -XX:NewSize=512m"

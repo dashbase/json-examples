@@ -1,0 +1,24 @@
+baseDir: /tmp/dashbase
+cluster:
+  name: _system
+  url: localhost:2181
+server:
+  applicationConnectors:
+    - type: http
+      port: 9988
+  applicationContextPath: /
+  adminContextPath: /admin
+  adminConnectors:
+      - type: http
+        port: 9989
+  requestLog:
+    appenders: []
+logging:
+  level: INFO
+  appenders:
+      - type: file
+        currentLogFilename: /tmp/dashbase/logs/system-monitor.log
+        archive: true
+        archivedLogFilenamePattern: /tmp/dashbase/logs/system-monitor-%d.log
+        archivedFileCount: 9
+        timeZone: UTC

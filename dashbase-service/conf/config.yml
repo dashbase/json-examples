@@ -1,0 +1,35 @@
+cluster:
+  name: 'dashbase-eero'
+  url: localhost:2181
+server:
+  applicationConnectors:
+    - type: http
+      port: 9876    
+  applicationContextPath: /
+  adminContextPath: /admin
+  adminConnectors:
+      - type: http
+        port: 9888
+
+metrics:
+  reporters:
+    - type: dashbase
+      url: "localhost:9988"
+      includes:
+        - ^jvm.*$
+        - ^dashbase.*$
+      useRegexFilters: true
+      frequency: 5 seconds
+
+logging:
+  level: INFO
+  appenders:
+      - type: file
+        currentLogFilename: /tmp/dashbase/logs/dashbase-api.log
+        archive: true
+        archivedLogFilenamePattern: /tmp/dashbase/logs/dashbase-api-%d.log
+        archivedFileCount: 2
+        timeZone: UTC
+      - type: dashbase
+        url: "localhost:9988"
+        timeZone: UTC
