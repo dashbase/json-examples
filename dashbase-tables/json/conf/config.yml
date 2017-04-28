@@ -8,27 +8,39 @@ dashbase:
   firehose:
     params:
       file: "../data/nginx.json"
+      numReplications: 1000000 
     type: file
+
   indexer:
-    maxIndexingDelayInSec: 5
+    maxIndexingDelayInSec: 30
+
+  retention:
+    numDays: 0.007
+
   parser:
     type: json
     params:
-        pattern:
-          timeFormat: "dd/MMM/yyyy:HH:mm:ss Z"
-          schema:
-              - name: timestamp
-                type: time
-              - name: host
-                type: meta
-              - name: request
-                type: text
-              - name: responseCode
-                type: meta
-              - name: numBytes
-                type: numeric
-              - name: agent
-                type: text
+      pattern:
+        timeFormat: now
+        schema:
+          - name: "@timestamp"
+            type: time
+          - name: host
+            type: meta
+          - name: request
+            type: text
+          - name: response
+            type: meta
+          - name: bytesSent
+            type: numeric
+          - name: error
+            type: meta
+          - name: msg
+            type: text
+          - name: level
+            type: meta
+          - name: agent
+            type: text
 
 server:
   applicationConnectors:
