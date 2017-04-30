@@ -1,5 +1,5 @@
 cluster:
-  name: 'dashbase-eero'
+  name: 'dashbase-service'
   url: localhost:2181
 server:
   applicationConnectors:
