@@ -49,6 +49,16 @@ server:
   adminConnectors:
   - type: http
     port: ${ADMINPORT} 
+	
+metrics:
+  reporters:
+    - type: dashbase
+      url: "localhost:9988"
+      includes:
+        - ^jvm.*$
+        - ^dashbase.*$
+      useRegexFilters: true
+      frequency: 5 seconds
 
 logging:
   level: INFO
@@ -60,5 +70,5 @@ logging:
         archivedFileCount: 9
         timeZone: UTC
       - type: dashbase
-        url: "${MONITOR_ADDR}:9988"
+        url: "localhost:9988"
         timeZone: UTC
