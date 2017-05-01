@@ -1,4 +1,4 @@
-baseDir: /tmp/dashbase
+baseDir: /tmp/dashbase/system
 cluster:
   name: _system
   url: localhost:2181
@@ -13,6 +13,17 @@ server:
         port: 9989
   requestLog:
     appenders: []
+
+metrics:
+  reporters:
+    - type: dashbase
+      url: "${MONITOR_ADDR}:9988"
+      includes:
+        - ^jvm.*$
+        - ^dashbase.*$
+      useRegexFilters: true
+      frequency: 5 seconds
+	  
 logging:
   level: INFO
   appenders:
@@ -21,4 +32,7 @@ logging:
         archive: true
         archivedLogFilenamePattern: /tmp/dashbase/logs/system-monitor-%d.log
         archivedFileCount: 9
+        timeZone: UTC
+      - type: dashbase
+        url: "${MONITOR_ADDR}:9988"
         timeZone: UTC

@@ -14,7 +14,7 @@ server:
 metrics:
   reporters:
     - type: dashbase
-      url: "localhost:9988"
+      url: "${MONITOR_ADDR}:9988"
       includes:
         - ^jvm.*$
         - ^dashbase.*$
@@ -31,5 +31,5 @@ logging:
         archivedFileCount: 2
         timeZone: UTC
       - type: dashbase
-        url: "localhost:9988"
+        url: "${MONITOR_ADDR}:9988"
         timeZone: UTC
