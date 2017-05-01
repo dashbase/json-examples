@@ -23,7 +23,6 @@ metrics:
         - ^dashbase.*$
       useRegexFilters: true
       frequency: 5 seconds
-	  
 logging:
   level: INFO
   appenders:

@@ -49,7 +49,7 @@ server:
   adminConnectors:
   - type: http
     port: ${ADMINPORT} 
-	
+
 metrics:
   reporters:
     - type: dashbase
