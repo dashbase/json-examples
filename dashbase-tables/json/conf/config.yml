@@ -1,5 +1,5 @@
 dashbase:
-  baseDir: ../../../index
+  baseDir: /tmp/dashbase/index
 
   cluster:
     name: dashbase-example
@@ -54,8 +54,11 @@ logging:
   level: INFO
   appenders:
       - type: file
-        currentLogFilename: ../../../logs/dashbase.log
+        currentLogFilename: /tmp/dashbase/logs/dashbase.log
         archive: true
-        archivedLogFilenamePattern: ../../../logs/dashbase-%d.log
+        archivedLogFilenamePattern: /tmp/dashbase/logs/dashbase-%d.log
         archivedFileCount: 9
+        timeZone: UTC
+      - type: dashbase
+        url: "${MONITOR_ADDR}:9988"
         timeZone: UTC
